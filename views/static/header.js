@@ -42,14 +42,18 @@ module.exports = (lang) => {
         </ul>
       </div>
       <div class="header_user-links">
-        <a class="header_user-link" href="/${lang}/cart" title=${
-    userMenu.cart[lang]
-  }>
+        <a 
+          class="header_user-link" 
+          href="/${lang}/cart" 
+          title=${userMenu.cart[lang]}
+        >
           <i class="fas fa-shopping-bag"></i>
         </a>
-        <a class="header_user-link" href="/${lang}/profile" title=${
-    userMenu.userProfile[lang]
-  }>
+        <a 
+          class="header_user-link" 
+          href="/${lang}/profile" 
+          title=${userMenu.userProfile[lang]}
+        >
           <i class="far fa-user"></i>
         </a>
         ${langSelector(lang)}
