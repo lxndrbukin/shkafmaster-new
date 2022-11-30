@@ -1,5 +1,6 @@
 const header = require('./static/header');
 const footer = require('./static/footer');
+const banner = require('./static/banner');
 const callback = require('./static/callback');
 
 module.exports = ({ content, lang }) => {
@@ -19,9 +20,10 @@ module.exports = ({ content, lang }) => {
         <div class="container">
           ${header(lang)}
           <div class="content">
+            ${banner()}
             ${content}
           </div>
-          ${callback}
+          ${callback(lang)}
           ${footer(lang)}
         </div>
 

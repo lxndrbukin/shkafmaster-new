@@ -1,10 +1,15 @@
-module.exports = /*html*/ `
-  <div class="callback">
-    <span class="callback-header">Request a Call back</span>
-    <form action="/" method="POST">
-      <input placeholder="Name" />
-      <input placeholder="Phone number" />
-      <input type="submit" value="Submit" />
-    </form>
-  </div>
-`;
+const callbackLocal = require('../../public/localization/callback.json');
+const { header, nameField, phoneField, submitButton } = callbackLocal;
+
+module.exports = (lang) => {
+  return /*html*/ `
+    <div class="callback">
+      <span class="callback-header">${header[lang]}</span>
+      <form action="/" method="POST">
+        <input placeholder=${nameField[lang]} />
+        <input placeholder=${phoneField[lang]} />
+        <input type="submit" value=${submitButton[lang]} />
+      </form>
+    </div>
+    `;
+};

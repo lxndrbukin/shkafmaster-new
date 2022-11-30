@@ -1,7 +1,7 @@
 const headerLocal = require('../../public/localization/header.json');
 const { logo, menuButtons, userMenu } = headerLocal;
 
-const languages = ['ro', 'ru'];
+const languages = ['ro', 'ru', 'en'];
 const langSelector = (lang) => {
   return /*html*/ `
     <select class="header_lang-selector">
