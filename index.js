@@ -1,5 +1,4 @@
 const express = require('express');
-const layout = require('./views/layout');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
@@ -15,33 +14,11 @@ app.use(
 );
 app.use(cookieParser());
 
-app.get('/', (req, res) => {
-  if (req.cookies.lang) {
-    res.redirect(`/${req.cookies.lang}`);
-  } else {
-    res.redirect('/ro');
-  }
-});
-
-app.get('/:lng', (req, res) => {
-  res.send(layout({ content: '', lang: req.cookies.lang }));
-});
-
-app.get('/:lng/contacts', (req, res) => {
-  res.send(layout({ content: 'Contacts', lang: req.cookies.lang }));
-});
-
-app.get('/:lng/products', (req, res) => {
-  res.send(layout({ content: 'Products', lang: req.cookies.lang }));
-});
-
-app.get('/:lng/cart', (req, res) => {
-  res.send(layout({ content: 'Cart', lang: req.cookies.lang }));
-});
-
-app.get('/:lng/profile', (req, res) => {
-  res.send(layout({ content: 'Profile', lang: req.cookies.lang }));
-});
+require('./routes')(app);
+require('./routes/products')(app);
+require('./routes/contacts')(app);
+require('./routes/profile')(app);
+require('./routes/cart')(app);
 
 const PORT = 3000;
 app.listen(PORT, () => {

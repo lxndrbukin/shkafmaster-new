@@ -27,7 +27,7 @@ const langSelector = (lang) => {
 module.exports = (lang) => {
   return /*html*/ `
     <header class="header">
-      <a class="header-logo" href=/${lang}>
+      <a class="header-logo" href="/">
         <div class="header-logo_primary">
           <span class="header-logo_primary-left">SHKAF</span>
           <span class="header-logo_primary-right">MASTER</span>
@@ -36,22 +36,22 @@ module.exports = (lang) => {
       </a>
       <div class="header-links">
         <ul>
-          <li><a href="/${lang}">${menuButtons.home[lang]}</a></li>
-          <li><a href="/${lang}/products">${menuButtons.products[lang]}</a></li>
-          <li><a href="/${lang}/contacts">${menuButtons.contacts[lang]}</a></li>
+          <li><a href="/">${menuButtons.home[lang]}</a></li>
+          <li><a href="/products">${menuButtons.products[lang]}</a></li>
+          <li><a href="/contacts">${menuButtons.contacts[lang]}</a></li>
         </ul>
       </div>
       <div class="header_user-links">
         <a 
           class="header_user-link" 
-          href="/${lang}/cart" 
+          href="/cart" 
           title=${userMenu.cart[lang]}
         >
           <i class="fas fa-shopping-bag"></i>
         </a>
         <a 
           class="header_user-link" 
-          href="/${lang}/profile" 
+          href="/profile" 
           title=${userMenu.userProfile[lang]}
         >
           <i class="far fa-user"></i>

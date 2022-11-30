@@ -22,7 +22,7 @@ module.exports = ({ content, lang }) => {
             ${content}
           </div>
           ${callback}
-          ${footer}
+          ${footer(lang)}
         </div>
 
         <script src="/scripts/changeLanguage.js"></script>

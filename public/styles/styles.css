@@ -203,3 +203,9 @@ body a {
 .footer .footer-right .footer_nav-links .footer_nav-link {
   padding: 5px;
 }
+
+@media screen and (max-width: 1500px) {
+  .container {
+    width: 80% !important;
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "footerMenu": {
+    "products": {
+      "ru": "Продукты",
+      "ro": "Produse",
+      "en": "Products"
+    },
+    "promotions": {
+      "ru": "Акции",
+      "ro": "Promotii",
+      "en": "Promotions"
+    },
+    "contacts": {
+      "ru": "Контакты",
+      "ro": "Contacte",
+      "en": "Contacts"
+    }
+  }
+}
