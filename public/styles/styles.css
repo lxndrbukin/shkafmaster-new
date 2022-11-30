@@ -121,21 +121,23 @@ body a {
 .top-banner {
   display: flex;
   height: 300px;
-  width: 100%;
+  max-width: 800px;
   background-color: var(--div-bg-color-two);
   border-radius: 10px;
-  margin-top: 10px;
+  margin: 10px auto auto auto;
 }
 
 .top-banner .top-banner_left {
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 10px;
 }
 
 .top-banner .top-banner_left .top-banner_primary-text {
   margin: auto auto 0 auto;
   padding: 10px;
+  text-align: center;
 }
 
 .top-banner .top-banner_left .top-banner_order-btn {

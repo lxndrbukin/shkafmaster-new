@@ -6,9 +6,9 @@ module.exports = (lang) => {
     <div class="callback">
       <span class="callback-header">${header[lang]}</span>
       <form action="/" method="POST">
-        <input placeholder=${nameField[lang]} />
-        <input placeholder=${phoneField[lang]} />
-        <input type="submit" value=${submitButton[lang]} />
+        <input placeholder="${nameField[lang]}" />
+        <input placeholder="${phoneField[lang]}" />
+        <input type="submit" value="${submitButton[lang]}" />
       </form>
     </div>
     `;
