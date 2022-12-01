@@ -5,21 +5,23 @@ const languages = ['ro', 'ru', 'en'];
 const langSelector = (lang) => {
   return /*html*/ `
     <select class="header_lang-selector">
-      ${languages.map((language) => {
-        if (language === lang) {
-          return /*html*/ `
+      ${languages
+        .map((language) => {
+          if (language === lang) {
+            return /*html*/ `
             <option value=${language} selected>
               ${language.toUpperCase()}
             </option>
           `;
-        } else {
-          return /*html*/ `
+          } else {
+            return /*html*/ `
             <option value=${language}>
               ${language.toUpperCase()}
             </option>
           `;
-        }
-      })}
+          }
+        })
+        .join(' ')}
     </select>
   `;
 };

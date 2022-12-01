@@ -1,0 +1,34 @@
+{
+  "categoriesHeader": {
+    "ru": "Популярные категории",
+    "ro": "Categorii populare",
+    "en": "Popular categories"
+  },
+  "categoryNames": {
+    "kitchen": {
+      "ru": "Кухни",
+      "ro": "Bucătării",
+      "en": "Kitchen"
+    },
+    "wardrobes": {
+      "ru": "Шкафы",
+      "ro": "Dulapuri",
+      "en": "Wardrobes"
+    },
+    "hallways": {
+      "ru": "Прихожие",
+      "ro": "Antreuri",
+      "en": "Hallways"
+    },
+    "office": {
+      "ru": "Офис",
+      "ro": "Oficiu",
+      "en": "Office"
+    },
+    "tables": {
+      "ru": "Столы",
+      "ro": "Mese",
+      "en": "Tables"
+    }
+  }
+}
