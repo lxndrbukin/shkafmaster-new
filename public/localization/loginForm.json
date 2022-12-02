@@ -1,0 +1,24 @@
+{
+  "loginHeader": {
+    "ru": "Авторизация",
+    "ro": "Autentificare",
+    "en": "Login"
+  },
+  "loginForm": {
+    "email": {
+      "ru": "Эл. почта",
+      "ro": "E-mail",
+      "en": "Email"
+    },
+    "password": {
+      "ru": "Пароль",
+      "ro": "Parola",
+      "en": "Password"
+    }
+  },
+  "loginButton": {
+    "ru": "Войти",
+    "ro": "A intra",
+    "en": "Login"
+  }
+}

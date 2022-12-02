@@ -7,23 +7,23 @@ const categoriesList = (lang) => {
   return [
     {
       name: kitchen[lang],
-      img: '',
+      img: '/imgs/menu_kitchen.png',
     },
     {
       name: wardrobes[lang],
-      img: '',
+      img: '/imgs/menu_wardrobe.png',
     },
     {
       name: hallways[lang],
-      img: '',
+      img: '/imgs/menu_hallway.png',
     },
     {
       name: office[lang],
-      img: '',
+      img: '/imgs/menu_office.png',
     },
     {
       name: tables[lang],
-      img: '',
+      img: '/imgs/menu_table.png',
     },
   ];
 };
@@ -35,7 +35,12 @@ const categories = (lang) => {
         .map((category) => {
           return /*html*/ `
             <a href='/' class="category">
-              ${category.name}
+              <div 
+                style="background-image:url(${category.img})" 
+                class="category-bg"
+              >
+              </div>
+              <span class="category-header">${category.name}</span>
             </a>`;
         })
         .join(' ')}
@@ -43,13 +48,17 @@ const categories = (lang) => {
   `;
 };
 
-module.exports = (lang) => {
-  return /*html*/ `
-    <div class="categories">
-      <h3 class="categories-header">
-        ${categoriesHeader[lang]}
-      </h3>
-      ${categories(lang)}
-    </div>
-  `;
+module.exports = ({ lang, path }) => {
+  if (path === '/') {
+    return /*html*/ `
+      <div class="categories">
+        <h3 class="categories-header">
+          ${categoriesHeader[lang]}
+        </h3>
+        ${categories(lang)}
+      </div>
+    `;
+  } else {
+    return '';
+  }
 };
