@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const cookieParser = require('cookie-parser');
@@ -16,13 +16,13 @@ app.use(
 );
 app.use(cookieParser());
 
-mongoose
-  .connect(keys.mongoDB, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => console.log('CONNECTED TO MONGODB'))
-  .catch((error) => console.log(error));
+// mongoose
+//   .connect(keys.mongoDB, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => console.log('CONNECTED TO MONGODB'))
+//   .catch((error) => console.log(error));
 
 require('./routes')(app);
 require('./routes/products')(app);
@@ -30,6 +30,7 @@ require('./routes/contacts')(app);
 require('./routes/profile')(app);
 require('./routes/cart')(app);
 require('./routes/auth')(app);
+require('./routes/addItem')(app);
 
 const PORT = 3000;
 app.listen(PORT, () => {

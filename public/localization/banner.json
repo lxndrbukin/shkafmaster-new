@@ -1,0 +1,17 @@
+{
+  "primaryText": {
+    "ru": "С нами легко и просто",
+    "ro": "CU NOI E UȘOR ȘI SIMPLU",
+    "en": "With us it's easy and simple"
+  },
+  "orderButton": {
+    "ru": "Заказать",
+    "ro": "A comanda",
+    "en": "Order now"
+  },
+  "call": {
+    "ru": "Звоните",
+    "ro": "Sunati",
+    "en": "Call"
+  }
+}
