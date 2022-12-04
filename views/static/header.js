@@ -26,7 +26,31 @@ const langSelector = (lang) => {
   `;
 };
 
-module.exports = (lang) => {
+const showCartOrLogin = (lang, session) => {
+  if (session) {
+    return /*html*/ `
+      <a 
+        class="header_user-link" 
+        href="/cart" 
+        title=${userMenu.cart[lang]}
+      >
+        <i class="fas fa-shopping-bag"></i>
+      </a>
+    `;
+  } else {
+    return /*html*/ `
+      <a 
+        class="header_user-link" 
+        href="/login" 
+        title=${userMenu.cart[lang]}
+      >
+        <i class="fas fa-sign-in-alt"></i>
+      </a>
+    `;
+  }
+};
+
+module.exports = ({ lang, session }) => {
   return /*html*/ `
     <header class="header">
       <a class="header-logo" href="/">
@@ -44,13 +68,7 @@ module.exports = (lang) => {
         </ul>
       </div>
       <div class="header_user-links">
-        <a 
-          class="header_user-link" 
-          href="/cart" 
-          title=${userMenu.cart[lang]}
-        >
-          <i class="fas fa-shopping-bag"></i>
-        </a>
+        ${showCartOrLogin(lang, session)}
         <a 
           class="header_user-link" 
           href="/profile" 

@@ -5,7 +5,7 @@ module.exports = (lang) => {
   return /*html*/ `
     <div class="form-wrapper">
       <h3 class="form-header">${authHeader[lang]}</h3>
-      <form class="form">
+      <form class="form" action="/auth" method="POST">
         <input name="email" placeholder="${authForm.email[lang]}" class="form-input" type="text" />
         <input name="password" placeholder="${authForm.password[lang]}" class="form-input" type="password" />
         <input name="confirmPassword" placeholder="${authForm.confirmPassword[lang]}" class="form-input" type="password" />

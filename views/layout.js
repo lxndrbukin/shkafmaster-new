@@ -1,10 +1,10 @@
 const header = require('./static/header');
 const footer = require('./static/footer');
 const banner = require('./static/banner');
-const callback = require('./static/callback');
+// const callback = require('./static/callback');
 const categories = require('./static/categories');
 
-module.exports = ({ content, lang, path }) => {
+module.exports = ({ content, lang, path, session }) => {
   return /*html*/ `
     <!DOCTYPE html>
     <html lang="en">
@@ -18,7 +18,7 @@ module.exports = ({ content, lang, path }) => {
       </head>
       <body>
         <div class="container">
-          ${header(lang)}
+          ${header({ lang, session })}
           <div class="content">
             ${banner({ lang, path })}
             ${categories({ lang, path })}

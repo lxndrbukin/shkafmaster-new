@@ -10,6 +10,7 @@ module.exports = (app) => {
         content: homepage({ content: '' }),
         lang: langCookie,
         path,
+        session: req.session.userId,
       })
     );
   });
