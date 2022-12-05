@@ -2,7 +2,7 @@ const layout = require('../views/layout');
 
 module.exports = (app) => {
   app.get('/contacts', (req, res) => {
-    const langCookie = req.cookies.lang || 'ro';
-    res.send(layout({ content: 'Contacts', lang: langCookie }));
+    !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
+    res.send(layout({ content: 'Contacts', req }));
   });
 };

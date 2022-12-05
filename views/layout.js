@@ -4,7 +4,10 @@ const banner = require('./static/banner');
 // const callback = require('./static/callback');
 const categories = require('./static/categories');
 
-module.exports = ({ content, lang, path, session }) => {
+module.exports = ({ content, req }) => {
+  const { lang } = req.cookies;
+  const { session } = req;
+  const path = req.originalUrl;
   return /*html*/ `
     <!DOCTYPE html>
     <html lang="en">
@@ -24,10 +27,10 @@ module.exports = ({ content, lang, path, session }) => {
             ${categories({ lang, path })}
             ${content}
           </div>
-
           ${footer(lang)}
         </div>
         <script src="/scripts/changeLanguage.js"></script>
+        <script src="/scripts/headerProfile.js"></script>
       </body>
     </html>
   `;

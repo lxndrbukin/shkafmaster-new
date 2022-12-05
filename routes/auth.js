@@ -1,29 +1,17 @@
 const layout = require('../views/layout');
-const login = require('../views/pages/login');
-const auth = require('../views/pages/auth');
+const signinTemplate = require('../views/pages/signin');
+const signupTemplate = require('../views/pages/signup');
 const crypto = require('crypto');
 const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
 module.exports = (app) => {
-  app.get('/auth', (req, res) => {
-    const langCookie = req.cookies.lang || 'ro';
-    const path = req.originalUrl;
-    res.send(layout({ content: auth(langCookie), lang: langCookie, path }));
+  app.get('/signup', (req, res) => {
+    !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
+    res.send(layout({ content: signupTemplate(req.cookies.lang), req }));
   });
 
-  app.post('/login', async (req, res) => {
-    await User.findOne({ username: req.body.username }, (err, user) => {
-      if (err) {
-        console.log(err);
-      } else {
-        req.session.userId = user.userId;
-        res.redirect('/');
-      }
-    }).clone();
-  });
-
-  app.post('/auth', async (req, res) => {
+  app.post('/signup', async (req, res) => {
     const user = new User({
       userId: crypto.randomBytes(4).toString('hex'),
       email: req.body.email,
@@ -35,9 +23,25 @@ module.exports = (app) => {
   });
 
   app.get('/login', (req, res) => {
-    const langCookie = req.cookies.lang || 'ro';
-    const path = req.originalUrl;
-    res.send(layout({ content: login(langCookie), lang: langCookie, path }));
+    !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
+    res.send(layout({ content: signinTemplate(req.cookies.lang), req }));
+  });
+
+  app.post('/login', async (req, res) => {
+    await User.findOne({ email: req.body.email }, (err, user) => {
+      if (err) {
+        console.log(err);
+      } else if (user) {
+        if (req.body.password === user.password) {
+          req.session.userId = user.userId;
+          res.redirect('/');
+        } else {
+          res.redirect('/login');
+        }
+      } else {
+        res.redirect('/login');
+      }
+    }).clone();
   });
 
   app.get('/signout', (req, res) => {

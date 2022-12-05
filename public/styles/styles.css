@@ -6,6 +6,7 @@
   --font-color: #59423c;
   --font-color-two: #515472;
   --orange-color: #f36437;
+  --shadow: 0px 0px 1px #888888;
 }
 
 /* BODY */
@@ -29,6 +30,7 @@ body a {
   background-color: #ffffff;
   border-radius: 15px;
   padding: 0 30px;
+  box-shadow: var(--shadow);
 }
 
 /* HEADER */
@@ -83,6 +85,37 @@ body a {
   font-weight: 500;
 }
 
+.header .header_user {
+  position: relative;
+}
+
+.header .header_user-profile_wrapper {
+  position: absolute;
+  display: none;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background-color: #ffffff;
+  border-radius: 7px;
+  box-shadow: var(--shadow);
+  top: 40px;
+}
+
+.header .header_user-profile_wrapper .header_user-profile {
+  margin: auto;
+}
+
+.header .header_user-profile .header_user-profile_links {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.header .header_user-profile .header_user-profile_links .header_user-profile_link {
+  width: fit-content;
+  margin: auto;
+}
+
 .header .header_user-links {
   height: fit-content;
   margin: auto 0;
@@ -97,6 +130,11 @@ body a {
   border-radius: 7px;
   display: flex;
   justify-content: center;
+  cursor: pointer;
+}
+
+.header .header_user-links .header_user-link i {
+  padding: 5px;
 }
 
 .header .header_user-links .header_lang-selector {
@@ -322,6 +360,16 @@ body a {
   padding: 5px;
 }
 
+/* SIGN IN */
+.signup-redirect {
+  width: fit-content;
+  margin: auto;
+}
+
+.signup-redirect .signup-link {
+  color: var(--orange-color);
+}
+
 /* FORM */
 .form-wrapper {
   width: fit-content;
@@ -338,6 +386,7 @@ body a {
   display: flex;
   flex-direction: column;
   margin: auto;
+  width: fit-content;
 }
 
 .form .form-input {

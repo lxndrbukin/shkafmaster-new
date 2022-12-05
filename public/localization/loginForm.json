@@ -18,7 +18,17 @@
   },
   "loginButton": {
     "ru": "Войти",
-    "ro": "A intra",
+    "ro": "Intrati",
     "en": "Login"
+  },
+  "notSignedUpText": {
+    "ru": "Не зарегистрированы?",
+    "ro": "Nu sunteti inregistati?",
+    "en": "Not signed up?"
+  },
+  "signupLink": {
+    "ru": "Зарегистрируйтесь",
+    "ro": "Înscrieți-vă",
+    "en": "Sign up now"
   }
 }

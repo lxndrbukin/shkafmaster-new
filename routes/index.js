@@ -3,14 +3,11 @@ const homepage = require('../views/pages/home');
 
 module.exports = (app) => {
   app.get('/', (req, res) => {
-    const langCookie = req.cookies.lang || 'ro';
-    const path = req.originalUrl;
+    !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
     res.send(
       layout({
         content: homepage({ content: '' }),
-        lang: langCookie,
-        path,
-        session: req.session.userId,
+        req,
       })
     );
   });

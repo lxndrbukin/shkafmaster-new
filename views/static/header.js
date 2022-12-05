@@ -26,8 +26,8 @@ const langSelector = (lang) => {
   `;
 };
 
-const showCartOrLogin = (lang, session) => {
-  if (session) {
+const showProfileOrLogin = (lang, session) => {
+  if (session.userId) {
     return /*html*/ `
       <a 
         class="header_user-link" 
@@ -36,13 +36,30 @@ const showCartOrLogin = (lang, session) => {
       >
         <i class="fas fa-shopping-bag"></i>
       </a>
+      <div class="header_user">
+        <div 
+          class="header_user-link" 
+          id="header_profile-icon"
+          title=${userMenu.userProfile[lang]}
+        >
+          <i class="far fa-user"></i>
+        </div>
+        <div class="header_user-profile_wrapper">
+          <div class="header_user-profile">
+            <div class="header_user-profile_links">
+              <a class="header_user-profile_link" href="/profile">Profile</a>
+              <a class="header_user-profile_link" href="/signout">Sign out</a>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
   } else {
     return /*html*/ `
       <a 
         class="header_user-link" 
         href="/login" 
-        title=${userMenu.cart[lang]}
+        title=${userMenu.login[lang]}
       >
         <i class="fas fa-sign-in-alt"></i>
       </a>
@@ -68,14 +85,7 @@ module.exports = ({ lang, session }) => {
         </ul>
       </div>
       <div class="header_user-links">
-        ${showCartOrLogin(lang, session)}
-        <a 
-          class="header_user-link" 
-          href="/profile" 
-          title=${userMenu.userProfile[lang]}
-        >
-          <i class="far fa-user"></i>
-        </a>
+        ${showProfileOrLogin(lang, session)}
         ${langSelector(lang)}
       </div>
     </header>
