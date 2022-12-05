@@ -6,7 +6,7 @@
   --font-color: #59423c;
   --font-color-two: #515472;
   --orange-color: #f36437;
-  --shadow: 0px 0px 1px #888888;
+  --shadow: 0px 0px 1px #737373;
 }
 
 /* BODY */
@@ -111,7 +111,10 @@ body a {
   margin: auto;
 }
 
-.header .header_user-profile .header_user-profile_links .header_user-profile_link {
+.header
+  .header_user-profile
+  .header_user-profile_links
+  .header_user-profile_link {
   width: fit-content;
   margin: auto;
 }
