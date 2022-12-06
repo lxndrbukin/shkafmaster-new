@@ -1,7 +1,9 @@
 const bannerLocal = require('../../public/localization/banner.json');
 const { primaryText, orderButton, call } = bannerLocal;
 
-module.exports = ({ lang, path }) => {
+module.exports = ({ req }) => {
+  const { lang } = req.cookies;
+  const path = req.originalUrl;
   if (path === '/') {
     return /*html*/ `
       <div class="top-banner">

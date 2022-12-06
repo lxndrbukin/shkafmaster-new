@@ -6,7 +6,7 @@
   --font-color: #59423c;
   --font-color-two: #515472;
   --orange-color: #f36437;
-  --shadow: 0px 0px 1px #737373;
+  --shadow: 0px 0px 3px #d1d1d1;
 }
 
 /* BODY */
@@ -93,8 +93,8 @@ body a {
   position: absolute;
   display: none;
   right: 0;
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: fit-content;
   background-color: #ffffff;
   border-radius: 7px;
   box-shadow: var(--shadow);
@@ -103,12 +103,36 @@ body a {
 
 .header .header_user-profile_wrapper .header_user-profile {
   margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.header
+  .header_user-profile_wrapper
+  .header_user-profile
+  .header_user-profile-info {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: 10px;
+}
+.header
+  .header_user-profile_wrapper
+  .header_user-profile
+  .header_user-profile-info
+  .fa-user-circle {
+  font-size: 50px;
+  display: block;
+  margin: auto;
 }
 
 .header .header_user-profile .header_user-profile_links {
   display: flex;
   flex-direction: column;
   margin: auto;
+  padding: 10px;
 }
 
 .header

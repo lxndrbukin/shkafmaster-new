@@ -48,7 +48,9 @@ const categories = (lang) => {
   `;
 };
 
-module.exports = ({ lang, path }) => {
+module.exports = ({ req }) => {
+  const { lang } = req.cookies;
+  const path = req.originalUrl;
   if (path === '/') {
     return /*html*/ `
       <div class="categories">

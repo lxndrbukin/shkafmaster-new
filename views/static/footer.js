@@ -1,7 +1,8 @@
 const footerLocal = require('../../public/localization/footer.json');
 const { footerMenu } = footerLocal;
 
-module.exports = (lang) => {
+module.exports = ({ req }) => {
+  const { lang } = req.cookies;
   return /*html*/ `
     <footer class="footer">
       <div class="footer-left">
@@ -9,7 +10,11 @@ module.exports = (lang) => {
           <a class="footer_social-link" target="_blank" href="/">
             <i class="fab fa-telegram-plane"></i>
           </a>
-          <a class="footer_social-link" target="_blank" href="/">
+          <a 
+            class="footer_social-link" 
+            target="_blank" 
+            href="https://www.instagram.com/shkafmaster2004/"
+          >
             <i class="fab fa-instagram"></i>
           </a>
           <a class="footer_social-link" target="_blank" href="/">

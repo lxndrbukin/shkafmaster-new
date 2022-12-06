@@ -1,3 +1,4 @@
+const headerProfile = require('./headerProfile');
 const headerLocal = require('../../public/localization/header.json');
 const { logo, menuButtons, userMenu } = headerLocal;
 
@@ -9,16 +10,16 @@ const langSelector = (lang) => {
         .map((language) => {
           if (language === lang) {
             return /*html*/ `
-            <option value=${language} selected>
-              ${language.toUpperCase()}
-            </option>
-          `;
+              <option value=${language} selected>
+                ${language.toUpperCase()}
+              </option>
+            `;
           } else {
             return /*html*/ `
-            <option value=${language}>
-              ${language.toUpperCase()}
-            </option>
-          `;
+              <option value=${language}>
+                ${language.toUpperCase()}
+              </option>
+            `;
           }
         })
         .join(' ')}
@@ -26,7 +27,9 @@ const langSelector = (lang) => {
   `;
 };
 
-const showProfileOrLogin = (lang, session) => {
+const showProfileOrLogin = ({ req }) => {
+  const { session } = req;
+  const { lang } = req.cookies;
   if (session.userId) {
     return /*html*/ `
       <a 
@@ -36,23 +39,7 @@ const showProfileOrLogin = (lang, session) => {
       >
         <i class="fas fa-shopping-bag"></i>
       </a>
-      <div class="header_user">
-        <div 
-          class="header_user-link" 
-          id="header_profile-icon"
-          title=${userMenu.userProfile[lang]}
-        >
-          <i class="far fa-user"></i>
-        </div>
-        <div class="header_user-profile_wrapper">
-          <div class="header_user-profile">
-            <div class="header_user-profile_links">
-              <a class="header_user-profile_link" href="/profile">Profile</a>
-              <a class="header_user-profile_link" href="/signout">Sign out</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      ${headerProfile({ req })}
     `;
   } else {
     return /*html*/ `
@@ -67,7 +54,8 @@ const showProfileOrLogin = (lang, session) => {
   }
 };
 
-module.exports = ({ lang, session }) => {
+module.exports = ({ req }) => {
+  const { lang } = req.cookies;
   return /*html*/ `
     <header class="header">
       <a class="header-logo" href="/">
@@ -85,7 +73,7 @@ module.exports = ({ lang, session }) => {
         </ul>
       </div>
       <div class="header_user-links">
-        ${showProfileOrLogin(lang, session)}
+        ${showProfileOrLogin({ req })}
         ${langSelector(lang)}
       </div>
     </header>
