@@ -1,6 +1,6 @@
 const layout = require('../views/layout');
-const signinTemplate = require('../views/pages/signin');
-const signupTemplate = require('../views/pages/signup');
+const signinTemplate = require('../views/pages/auth/signin');
+const signupTemplate = require('../views/pages/auth/signup');
 const usersRepo = require('../repositories/users');
 
 module.exports = (app) => {
@@ -10,17 +10,27 @@ module.exports = (app) => {
   });
 
   app.post('/signup', async (req, res) => {
-    const user = await usersRepo.create({
-      userId: usersRepo.randomId(),
-      email: req.body.email,
-      password: req.body.password,
-    });
-    user.save();
-    req.session = user;
-    res.redirect('/');
+    const { createPassword } = usersRepo;
+    const checkUser = await usersRepo.getOneBy({ email: req.body.email });
+    if (!checkUser) {
+      const user = await usersRepo.create({
+        userId: usersRepo.randomId(),
+        email: req.body.email,
+        password: await createPassword(req.body.password),
+      });
+      const { password, confirmPassword } = req.body;
+      if (password === confirmPassword) {
+        user.save();
+        req.session.userId = user.userId;
+        res.redirect('/');
+      } else {
+        res.redirect('/signup');
+      }
+    } else {
+    }
   });
 
-  app.get('/login', (req, res) => {
+  app.get('/login', async (req, res) => {
     !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
     res.send(layout({ content: signinTemplate(req.cookies.lang), req }));
   });
@@ -28,11 +38,13 @@ module.exports = (app) => {
   app.post('/login', async (req, res) => {
     const user = await usersRepo.getOneBy({ email: req.body.email });
     if (user) {
-      if (req.body.password === user.password) {
-        req.session = user;
+      const compare = await usersRepo.comparePasswords(
+        user.password,
+        req.body.password
+      );
+      if (compare) {
+        req.session.userId = user.userId;
         res.redirect('/');
-      } else {
-        res.redirect('/login');
       }
     } else {
       res.redirect('/login');

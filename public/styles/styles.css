@@ -98,7 +98,7 @@ body a {
   background-color: #ffffff;
   border-radius: 7px;
   box-shadow: var(--shadow);
-  top: 40px;
+  top: 41px;
 }
 
 .header .header_user-profile_wrapper .header_user-profile {
@@ -107,6 +107,20 @@ body a {
   flex-direction: column;
   justify-content: center;
   height: 100%;
+  position: relative;
+}
+
+.header .header_user-profile_wrapper .header_user-profile::before {
+  position: absolute;
+  content: '';
+  height: 10px;
+  width: 10px;
+  background-color: #ffffff;
+  top: -6px;
+  right: 10px;
+  border-top: 1px solid #eeeeee;
+  border-right: 1px solid #eeeeee;
+  transform: rotate(-45deg);
 }
 
 .header
@@ -268,9 +282,7 @@ body a {
   min-width: 30%;
   height: 200px;
   flex: 1 1 auto;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
+  box-shadow: var(--shadow);
   border-radius: 7px;
   background-color: var(--div-bg-color-two);
   margin: 0 7.5px 15px;

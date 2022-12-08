@@ -1,4 +1,4 @@
-const loginLocal = require('../../public/localization/loginForm.json');
+const loginLocal = require('../../../public/localization/loginForm.json');
 const { loginHeader, loginForm, loginButton, notSignedUpText, signupLink } =
   loginLocal;
 

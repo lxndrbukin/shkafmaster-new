@@ -1,4 +1,4 @@
-const authLocal = require('../../public/localization/authForm.json');
+const authLocal = require('../../../public/localization/authForm.json');
 const { authHeader, authForm, authButton } = authLocal;
 
 module.exports = (lang) => {
