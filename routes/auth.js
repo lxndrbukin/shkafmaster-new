@@ -6,7 +6,7 @@ const usersRepo = require('../repositories/users');
 module.exports = (app) => {
   app.get('/signup', (req, res) => {
     !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
-    res.send(layout({ content: signupTemplate(req.cookies.lang), req }));
+    res.send(layout({ content: signupTemplate({ req }), req }));
   });
 
   app.post('/signup', async (req, res) => {
@@ -19,20 +19,27 @@ module.exports = (app) => {
         password: await createPassword(req.body.password),
       });
       const { password, confirmPassword } = req.body;
+      if (!password || password.length < 4) {
+        req.errors = { password: true };
+        return res.send(layout({ content: signupTemplate({ req }), req }));
+      }
       if (password === confirmPassword) {
         user.save();
         req.session.userId = user.userId;
         res.redirect('/');
       } else {
-        res.redirect('/signup');
+        req.errors = { confirmPassword: true };
+        return res.send(layout({ content: signupTemplate({ req }), req }));
       }
     } else {
+      req.errors = { email: true };
+      return res.send(layout({ content: signupTemplate({ req }), req }));
     }
   });
 
   app.get('/login', async (req, res) => {
     !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
-    res.send(layout({ content: signinTemplate(req.cookies.lang), req }));
+    res.send(layout({ content: signinTemplate({ req }), req }));
   });
 
   app.post('/login', async (req, res) => {
@@ -45,9 +52,15 @@ module.exports = (app) => {
       if (compare) {
         req.session.userId = user.userId;
         res.redirect('/');
+      } else {
+        req.errors = { password: true };
+        return res.send(layout({ content: signinTemplate({ req }), req }));
       }
     } else {
-      res.redirect('/login');
+      req.errors = { email: true };
+      return res.send(
+        layout({ content: signinTemplate(req.cookies.lang, req.errors), req })
+      );
     }
   });
 

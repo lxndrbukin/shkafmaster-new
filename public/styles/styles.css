@@ -460,6 +460,10 @@ body a {
   margin: 5px;
 }
 
+.form-error {
+  margin: 5px;
+}
+
 @media screen and (max-width: 1500px) {
   .container {
     width: 80% !important;
