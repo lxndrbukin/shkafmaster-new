@@ -1,10 +1,15 @@
 const errorsLocal = require('../../../../public/localization/errors.json');
-const { email, password, confirmPassword } = errorsLocal;
 
-module.exports = (errors, input, lang) => {
+module.exports = ({ req }, input) => {
+  const { errors } = req;
+  const { lang } = req.cookies;
   if (errors) {
     if (errors[input]) {
-      return `${errorsLocal[input].msg[lang]}`;
+      return /*html*/ `<p class="form-error">${errorsLocal[input].msg[lang]}</p>`;
+    } else {
+      return '';
     }
+  } else {
+    return '';
   }
 };

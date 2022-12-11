@@ -58,9 +58,7 @@ module.exports = (app) => {
       }
     } else {
       req.errors = { email: true };
-      return res.send(
-        layout({ content: signinTemplate(req.cookies.lang, req.errors), req })
-      );
+      return res.send(layout({ content: signinTemplate({ req }), req }));
     }
   });
 
