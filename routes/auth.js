@@ -5,7 +5,7 @@ const usersRepo = require('../repositories/users');
 
 module.exports = (app) => {
   app.get('/signup', (req, res) => {
-    !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
+    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
     res.send(layout({ content: signupTemplate({ req }), req }));
   });
 
@@ -38,7 +38,7 @@ module.exports = (app) => {
   });
 
   app.get('/login', async (req, res) => {
-    !req.cookies.lang ? req.cookies.lang === 'ro' : req.cookies.lang;
+    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
     res.send(layout({ content: signinTemplate({ req }), req }));
   });
 
