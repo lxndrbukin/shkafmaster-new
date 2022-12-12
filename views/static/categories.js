@@ -7,22 +7,27 @@ const categoriesList = (lang) => {
   return [
     {
       name: kitchen[lang],
+      path: 'kitchens',
       img: '/imgs/menu_kitchen.png',
     },
     {
       name: wardrobes[lang],
+      path: 'wardrobes',
       img: '/imgs/menu_wardrobe.png',
     },
     {
       name: hallways[lang],
+      path: 'hallways',
       img: '/imgs/menu_hallway.png',
     },
     {
       name: office[lang],
+      path: 'offices',
       img: '/imgs/menu_office.png',
     },
     {
       name: tables[lang],
+      path: 'tables',
       img: '/imgs/menu_table.png',
     },
   ];
@@ -34,7 +39,7 @@ const categories = (lang) => {
       ${categoriesList(lang)
         .map((category) => {
           return /*html*/ `
-            <a href='/' class="category">
+            <a href="/products/${category.path}" class="category">
               <div 
                 style="background-image:url(${category.img})" 
                 class="category-bg"

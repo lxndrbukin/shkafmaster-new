@@ -120,7 +120,10 @@ body a {
   position: relative;
 }
 
-.header-wrapper .header .header_user-profile_wrapper .header_user-profile::before {
+.header-wrapper
+  .header
+  .header_user-profile_wrapper
+  .header_user-profile::before {
   position: absolute;
   content: '';
   height: 10px;
@@ -133,7 +136,8 @@ body a {
   transform: rotate(-45deg);
 }
 
-.header-wrapper .header
+.header-wrapper
+  .header
   .header_user-profile_wrapper
   .header_user-profile
   .header_user-profile-info {
@@ -143,7 +147,8 @@ body a {
   padding: 10px;
 }
 
-.header-wrapper .header
+.header-wrapper
+  .header
   .header_user-profile_wrapper
   .header_user-profile
   .header_user-profile-info
@@ -160,7 +165,8 @@ body a {
   padding: 10px;
 }
 
-.header-wrapper .header
+.header-wrapper
+  .header
   .header_user-profile
   .header_user-profile_links
   .header_user-profile_link {
@@ -215,6 +221,7 @@ body a {
   background-color: #ffffff;
   border-radius: 10px;
   margin: 10px auto auto auto;
+  box-shadow: var(--shadow);
 }
 
 .top-banner .top-banner_left {

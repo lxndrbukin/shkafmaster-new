@@ -5,4 +5,9 @@ module.exports = (app) => {
     !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
     res.send(layout({ content: 'Products', req }));
   });
+
+  app.get('/products/:productName', (req, res) => {
+    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
+    res.send(layout({ content: 'Products', req }));
+  });
 };
