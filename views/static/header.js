@@ -57,25 +57,27 @@ const showProfileOrLogin = ({ req }) => {
 module.exports = ({ req }) => {
   const { lang } = req.cookies;
   return /*html*/ `
-    <header class="header">
-      <a class="header-logo" href="/">
-        <div class="header-logo_primary">
-          <span class="header-logo_primary-left">SHKAF</span>
-          <span class="header-logo_primary-right">MASTER</span>
+    <div class="header-wrapper">
+      <header class="header">
+        <a class="header-logo" href="/">
+          <div class="header-logo_primary">
+            <span class="header-logo_primary-left">SHKAF</span>
+            <span class="header-logo_primary-right">MASTER</span>
+          </div>
+          <span class="header-logo_secondary">${logo[lang]}</span>
+        </a>
+        <div class="header-links">
+          <ul>
+            <li><a href="/">${menuButtons.home[lang]}</a></li>
+            <li><a href="/products">${menuButtons.products[lang]}</a></li>
+            <li><a href="/contacts">${menuButtons.contacts[lang]}</a></li>
+          </ul>
         </div>
-        <span class="header-logo_secondary">${logo[lang]}</span>
-      </a>
-      <div class="header-links">
-        <ul>
-          <li><a href="/">${menuButtons.home[lang]}</a></li>
-          <li><a href="/products">${menuButtons.products[lang]}</a></li>
-          <li><a href="/contacts">${menuButtons.contacts[lang]}</a></li>
-        </ul>
-      </div>
-      <div class="header_user-links">
-        ${showProfileOrLogin({ req })}
-        ${langSelector(lang)}
-      </div>
-    </header>
+        <div class="header_user-links">
+          ${showProfileOrLogin({ req })}
+          ${langSelector(lang)}
+        </div>
+      </header>
+    </div>
   `;
 };

@@ -18,15 +18,13 @@ module.exports = ({ content, req }) => {
         <title>SHKAFMASTER - ${pageTitle({ req })}</title>
       </head>
       <body>
-        <div class="container">
-          ${header({ req })}
-          <div class="content">
-            ${banner({ req })}
-            ${categories({ req })}
-            ${content}
-          </div>
-          ${footer({ req })}
+        ${header({ req })}
+        <div class="content">
+          ${banner({ req })}
+          ${categories({ req })}
+          ${content}
         </div>
+        ${footer({ req })}
         <script src="/scripts/changeLanguage.js"></script>
         <script src="/scripts/headerProfile.js"></script>
       </body>
