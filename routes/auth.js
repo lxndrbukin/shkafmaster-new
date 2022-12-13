@@ -1,4 +1,3 @@
-const layout = require('../views/layout');
 const signinTemplate = require('../views/pages/auth/signin');
 const signupTemplate = require('../views/pages/auth/signup');
 const usersRepo = require('../repositories/users');
@@ -6,44 +5,48 @@ const usersRepo = require('../repositories/users');
 module.exports = (app) => {
   app.get('/signup', (req, res) => {
     !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
-    res.send(layout({ content: signupTemplate({ req }), req }));
+    res.send(signupTemplate({ req }));
   });
 
   app.post('/signup', async (req, res) => {
-    const { createPassword } = usersRepo;
+    req.errors = {};
     const checkUser = await usersRepo.getOneBy({ email: req.body.email });
-    if (!checkUser) {
+    const checkPasswd = await usersRepo.checkPassword(req.body.password);
+    if (checkUser || req.body.email.length === 0) {
+      req.errors['email'] = true;
+      const { password, confirmPassword } = req.body;
+      if (!checkPasswd) {
+        req.errors['password'] = true;
+      }
+      if (password !== confirmPassword || confirmPassword.length === 0) {
+        req.errors['confirmPassword'] = true;
+      }
+      return res.send(signupTemplate({ req }));
+    } else if (
+      (!checkUser || !req.body.email.length === 0) &&
+      checkPasswd &&
+      password === confirmPassword
+    ) {
       const user = await usersRepo.create({
         userId: usersRepo.randomId(),
         email: req.body.email,
-        password: await createPassword(req.body.password),
+        password: await usersRepo.createPassword(req.body.password),
       });
-      const { password, confirmPassword } = req.body;
-      if (!password || password.length < 4) {
-        req.errors = { password: true };
-        return res.send(layout({ content: signupTemplate({ req }), req }));
-      }
-      if (password === confirmPassword) {
-        user.save();
-        req.session.userId = user.userId;
-        res.redirect('/');
-      } else {
-        req.errors = { confirmPassword: true };
-        return res.send(layout({ content: signupTemplate({ req }), req }));
-      }
-    } else {
-      req.errors = { email: true };
-      return res.send(layout({ content: signupTemplate({ req }), req }));
+      user.save();
+      req.session.userId = user.userId;
+      res.redirect('/');
     }
   });
 
   app.get('/login', async (req, res) => {
     !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
-    res.send(layout({ content: signinTemplate({ req }), req }));
+    res.send(signinTemplate({ req }));
   });
 
   app.post('/login', async (req, res) => {
+    req.errors = {};
     const user = await usersRepo.getOneBy({ email: req.body.email });
+    const checkPasswd = await usersRepo.checkPassword(req.body.password);
     if (user) {
       const compare = await usersRepo.comparePasswords(
         user.password,
@@ -52,13 +55,16 @@ module.exports = (app) => {
       if (compare) {
         req.session.userId = user.userId;
         res.redirect('/');
-      } else {
-        req.errors = { password: true };
-        return res.send(layout({ content: signinTemplate({ req }), req }));
+      } else if (!compare || !checkPasswd) {
+        req.errors['password'] = true;
+        return res.send(signinTemplate({ req }));
       }
-    } else {
-      req.errors = { email: true };
-      return res.send(layout({ content: signinTemplate({ req }), req }));
+    } else if (!user) {
+      req.errors['email'] = true;
+      if (!checkPassword) {
+        req.errors['password'] = true;
+      }
+      return res.send(signinTemplate({ req }));
     }
   });
 

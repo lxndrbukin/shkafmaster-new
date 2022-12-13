@@ -16,6 +16,14 @@ class UsersRepository extends Repository {
     return `${password.toString('hex')}.${salt}`;
   }
 
+  async checkPassword(password) {
+    if (password.length >= 4 && password.length <= 20) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   async comparePasswords(savedPassword, suppliedPassword) {
     const [hashed, salt] = savedPassword.split('.');
     const hashedSupplied = await scrypt(suppliedPassword, salt, 64);
