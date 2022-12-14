@@ -12,9 +12,9 @@ module.exports = (app) => {
     req.errors = {};
     const checkUser = await usersRepo.getOneBy({ email: req.body.email });
     const checkPasswd = await usersRepo.checkPassword(req.body.password);
+    const { password, confirmPassword } = req.body;
     if (checkUser || req.body.email.length === 0) {
       req.errors['email'] = true;
-      const { password, confirmPassword } = req.body;
       if (!checkPasswd) {
         req.errors['password'] = true;
       }
@@ -22,19 +22,24 @@ module.exports = (app) => {
         req.errors['confirmPassword'] = true;
       }
       return res.send(signupTemplate({ req }));
-    } else if (
-      (!checkUser || !req.body.email.length === 0) &&
-      checkPasswd &&
-      password === confirmPassword
-    ) {
-      const user = await usersRepo.create({
-        userId: usersRepo.randomId(),
-        email: req.body.email,
-        password: await usersRepo.createPassword(req.body.password),
-      });
-      user.save();
-      req.session.userId = user.userId;
-      res.redirect('/');
+    } else if (!checkUser || !req.body.email.length === 0) {
+      if (checkPasswd && password === confirmPassword) {
+        const user = await usersRepo.create({
+          userId: usersRepo.randomId(),
+          email: req.body.email,
+          password: await usersRepo.createPassword(req.body.password),
+        });
+        user.save();
+        req.session.userId = user.userId;
+        res.redirect('/');
+      }
+      if (!checkPasswd) {
+        req.errors['password'] = true;
+        if (confirmPassword !== password) {
+          req.errors['confirmPassword'] = true;
+        }
+        return res.send(signupTemplate({ req }));
+      }
     }
   });
 
@@ -61,7 +66,7 @@ module.exports = (app) => {
       }
     } else if (!user) {
       req.errors['email'] = true;
-      if (!checkPassword) {
+      if (!checkPasswd) {
         req.errors['password'] = true;
       }
       return res.send(signinTemplate({ req }));
