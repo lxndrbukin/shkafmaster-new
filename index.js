@@ -34,6 +34,7 @@ require('./routes/profile')(app);
 require('./routes/cart')(app);
 require('./routes/auth')(app);
 require('./routes/addItem')(app);
+require('./routes/api')(app);
 
 const PORT = 3000;
 app.listen(PORT, () => {

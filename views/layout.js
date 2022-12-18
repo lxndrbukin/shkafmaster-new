@@ -5,6 +5,7 @@ const pageTitle = require('./helperScripts/pageTitle');
 const categories = require('./static/categories');
 
 module.exports = ({ content, req }) => {
+  !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
   return /*html*/ `
     <!DOCTYPE html>
     <html lang="en">

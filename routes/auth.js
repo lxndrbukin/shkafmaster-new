@@ -1,3 +1,5 @@
+const { errors } = require('./helpers/middlewares');
+const { requireEmail } = require('./helpers/validators');
 const signinTemplate = require('../views/pages/auth/signin');
 const signupTemplate = require('../views/pages/auth/signup');
 const usersRepo = require('../repositories/users');
@@ -8,12 +10,12 @@ module.exports = (app) => {
     res.send(signupTemplate({ req }));
   });
 
-  app.post('/signup', async (req, res) => {
+  app.post('/signup', [requireEmail], async (req, res) => {
     req.errors = {};
     const checkUser = await usersRepo.getOneBy({ email: req.body.email });
     const checkPasswd = await usersRepo.checkPassword(req.body.password);
     const { password, confirmPassword } = req.body;
-    if (checkUser || req.body.email.length === 0) {
+    if (checkUser || req.body.email === null) {
       req.errors['email'] = true;
       if (!checkPasswd) {
         req.errors['password'] = true;
@@ -48,8 +50,8 @@ module.exports = (app) => {
     res.send(signinTemplate({ req }));
   });
 
-  app.post('/login', async (req, res) => {
-    req.errors = {};
+  app.post('/login', errors(), async (req, res) => {
+    // req.errors = {};
     const user = await usersRepo.getOneBy({ email: req.body.email });
     const checkPasswd = await usersRepo.checkPassword(req.body.password);
     if (user) {
@@ -65,7 +67,7 @@ module.exports = (app) => {
         return res.send(signinTemplate({ req }));
       }
     } else if (!user) {
-      req.errors['email'] = true;
+      // req.errors['email'] = true;
       if (!checkPasswd) {
         req.errors['password'] = true;
       }

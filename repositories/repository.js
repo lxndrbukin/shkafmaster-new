@@ -15,6 +15,11 @@ class Repository {
     return Schema.findOne(filters).clone();
   }
 
+  async getAll() {
+    const { Schema } = this;
+    return Schema.find().select('-_id').clone();
+  }
+
   randomId() {
     return crypto.randomBytes(4).toString('hex');
   }
