@@ -1,8 +1,9 @@
 const layout = require('../views/layout');
 
+const { setLanguage } = require('./helpers/middlewares');
+
 module.exports = (app) => {
-  app.get('/profile', (req, res) => {
-    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
+  app.get('/profile', setLanguage, (req, res) => {
     if (req.session.userId) {
       res.send(layout({ content: req.session.userId, req }));
     } else {

@@ -54,5 +54,13 @@
       "ro": "Inscriere",
       "en": "Sign Up"
     }
+  },
+  {
+    "path": "/admin",
+    "languages": {
+      "ru": "Панель управления",
+      "ro": "Panela",
+      "en": "Admin Panel"
+    }
   }
 ]

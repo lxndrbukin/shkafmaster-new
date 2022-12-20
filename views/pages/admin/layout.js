@@ -1,9 +1,3 @@
-const header = require('./static/header');
-const footer = require('./static/footer');
-const banner = require('./static/banner');
-const pageTitle = require('./helperScripts/pageTitle');
-const categories = require('./static/categories');
-
 module.exports = ({ content, req }) => {
   return /*html*/ `
     <!DOCTYPE html>

@@ -1,8 +1,9 @@
 const layout = require('../views/layout');
 
+const { setLanguage } = require('./helpers/middlewares');
+
 module.exports = (app) => {
-  app.get('/contacts', (req, res) => {
-    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
+  app.get('/contacts', setLanguage, (req, res) => {
     res.send(layout({ content: 'Contacts', req }));
   });
 };

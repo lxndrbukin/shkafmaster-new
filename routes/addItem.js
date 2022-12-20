@@ -1,9 +1,9 @@
-const layout = require('../views/layout');
-const addItem = require('../views/pages/addItem');
+const newItemTemplate = require('../views/pages/admin/addItem');
+
+const { setLanguage } = require('./helpers/middlewares');
 
 module.exports = (app) => {
-  app.get('/new-item', (req, res) => {
-    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
-    res.send(layout({ content: addItem(langCookie), req }));
+  app.get('/new-item', setLanguage, (req, res) => {
+    res.send(newItemTemplate({ req }));
   });
 };

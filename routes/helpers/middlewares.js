@@ -11,4 +11,8 @@ module.exports = {
       next();
     };
   },
+  setLanguage(req, res, next) {
+    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
+    next();
+  },
 };

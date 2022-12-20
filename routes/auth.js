@@ -1,12 +1,13 @@
 const { errors } = require('./helpers/middlewares');
 const { requireEmail } = require('./helpers/validators');
+const { setLanguage } = require('./helpers/middlewares');
+
 const signinTemplate = require('../views/pages/auth/signin');
 const signupTemplate = require('../views/pages/auth/signup');
 const usersRepo = require('../repositories/users');
 
 module.exports = (app) => {
-  app.get('/signup', (req, res) => {
-    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
+  app.get('/signup', setLanguage, (req, res) => {
     res.send(signupTemplate({ req }));
   });
 
@@ -45,8 +46,7 @@ module.exports = (app) => {
     }
   });
 
-  app.get('/login', async (req, res) => {
-    !req.cookies.lang ? (req.cookies.lang = 'ro') : req.cookies.lang;
+  app.get('/login', setLanguage, async (req, res) => {
     res.send(signinTemplate({ req }));
   });
 

@@ -2,60 +2,59 @@ const headerProfile = require('./headerProfile');
 const headerLocal = require('../../public/localization/header.json');
 const { logo, menuButtons, userMenu } = headerLocal;
 
-const languages = ['ro', 'ru', 'en'];
-const langSelector = (lang) => {
-  return /*html*/ `
-    <select class="header_lang-selector">
-      ${languages
-        .map((language) => {
-          if (language === lang) {
-            return /*html*/ `
-              <option value=${language} selected>
-                ${language.toUpperCase()}
-              </option>
-            `;
-          } else {
-            return /*html*/ `
-              <option value=${language}>
-                ${language.toUpperCase()}
-              </option>
-            `;
-          }
-        })
-        .join(' ')}
-    </select>
-  `;
-};
-
-const showProfileOrLogin = ({ req }) => {
-  const { session } = req;
-  const { lang } = req.cookies;
-  if (session.userId) {
-    return /*html*/ `
-      <a 
-        class="header_user-link" 
-        href="/cart" 
-        title=${userMenu.cart[lang]}
-      >
-        <i class="fas fa-shopping-bag"></i>
-      </a>
-      ${headerProfile({ req })}
-    `;
-  } else {
-    return /*html*/ `
-      <a 
-        class="header_user-link" 
-        href="/login" 
-        title=${userMenu.login[lang]}
-      >
-        <i class="fas fa-sign-in-alt"></i>
-      </a>
-    `;
-  }
-};
-
 module.exports = ({ req }) => {
+  const languages = ['ro', 'ru', 'en'];
   const { lang } = req.cookies;
+  const { session } = req;
+  const langSelector = () => {
+    return /*html*/ `
+      <select class="header_lang-selector">
+        ${languages
+          .map((language) => {
+            if (language === lang) {
+              return /*html*/ `
+                <option value=${language} selected>
+                  ${language.toUpperCase()}
+                </option>
+              `;
+            } else {
+              return /*html*/ `
+                <option value=${language}>
+                  ${language.toUpperCase()}
+                </option>
+              `;
+            }
+          })
+          .join(' ')}
+      </select>
+    `;
+  };
+
+  const showProfileOrLogin = () => {
+    if (session.userId) {
+      return /*html*/ `
+        <a 
+          class="header_user-link" 
+          href="/cart" 
+          title=${userMenu.cart[lang]}
+        >
+          <i class="fas fa-shopping-bag"></i>
+        </a>
+        ${headerProfile({ req })}
+      `;
+    } else {
+      return /*html*/ `
+        <a 
+          class="header_user-link" 
+          href="/login" 
+          title=${userMenu.login[lang]}
+        >
+          <i class="fas fa-sign-in-alt"></i>
+        </a>
+      `;
+    }
+  };
+
   return /*html*/ `
     <div class="header-wrapper">
       <header class="header">
@@ -74,8 +73,8 @@ module.exports = ({ req }) => {
           </ul>
         </div>
         <div class="header_user-links">
-          ${showProfileOrLogin({ req })}
-          ${langSelector(lang)}
+          ${showProfileOrLogin()}
+          ${langSelector()}
         </div>
       </header>
     </div>
