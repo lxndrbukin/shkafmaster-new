@@ -3,7 +3,7 @@ const headerLocal = require('../../public/localization/header.json');
 const { logo, menuButtons, userMenu } = headerLocal;
 
 module.exports = ({ req }) => {
-  const languages = ['ro', 'ru', 'en'];
+  const languages = ['ro', 'ru'];
   const { lang } = req.cookies;
   const { session } = req;
   const langSelector = () => {
@@ -58,17 +58,16 @@ module.exports = ({ req }) => {
   return /*html*/ `
     <div class="header-wrapper">
       <header class="header">
-        <a class="header-logo" href="/">
-          <div class="header-logo_primary">
-            <span class="header-logo_primary-left">SHKAF</span>
-            <span class="header-logo_primary-right">MASTER</span>
+        <a class="logo" href="/">
+          <div class="logo_primary">
+            <span class="logo_primary-left">SHKAF</span>
+            <span class="logo_primary-right">MASTER</span>
           </div>
-          <span class="header-logo_secondary">${logo[lang]}</span>
         </a>
         <div class="header-links">
           <ul>
             <li><a href="/">${menuButtons.home[lang]}</a></li>
-            <li><a href="/products">${menuButtons.products[lang]}</a></li>
+            <li><a href="/catalog">${menuButtons.products[lang]}</a></li>
             <li><a href="/contacts">${menuButtons.contacts[lang]}</a></li>
           </ul>
         </div>

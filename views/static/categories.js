@@ -1,5 +1,5 @@
 const categoriesLocal = require('../../public/localization/categories.json');
-const { kitchen, wardrobes, hallways, office, tables } =
+const { kitchen, wardrobes, hallways, office, tables, living } =
   categoriesLocal.categoryNames;
 const { categoriesHeader } = categoriesLocal;
 
@@ -30,6 +30,11 @@ const categoriesList = (lang) => {
       path: 'tables',
       img: '/imgs/menu_table.png',
     },
+    {
+      name: living[lang],
+      path: 'livings',
+      img: '/imgs/menu_living.png',
+    },
   ];
 };
 
@@ -37,15 +42,11 @@ const categories = (lang) => {
   return /*html*/ `
     <div class="categories-list">
       ${categoriesList(lang)
-        .map((category) => {
+        .map(({ path, name, img }) => {
           return /*html*/ `
-            <a href="/products/${category.path}" class="category">
-              <div 
-                style="background-image:url(${category.img})" 
-                class="category-bg"
-              >
-              </div>
-              <span class="category-header">${category.name}</span>
+            <a href="/catalog/${path}" class="category ${path}">
+              <img src="${img}" class="category-bg">
+              <span class="category-header">${name}</span>
             </a>`;
         })
         .join(' ')}
@@ -55,17 +56,14 @@ const categories = (lang) => {
 
 module.exports = ({ req }) => {
   const { lang } = req.cookies;
-  const path = req.originalUrl;
-  if (path === '/') {
-    return /*html*/ `
+  return /*html*/ `
+    <div class="categories-wrapper">
       <div class="categories">
         <h3 class="categories-header">
           ${categoriesHeader[lang]}
         </h3>
         ${categories(lang)}
       </div>
-    `;
-  } else {
-    return '';
-  }
+    </div>
+  `;
 };

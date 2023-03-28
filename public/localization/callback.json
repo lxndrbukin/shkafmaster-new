@@ -1,7 +1,7 @@
 {
   "header": {
-    "ru": "Обратный звонок",
-    "ro": "Apel invers",
+    "ru": "Запросите звонок",
+    "ro": "Solicitați un apel",
     "en": "Request a call back"
   },
   "nameField": {
@@ -15,8 +15,8 @@
     "en": "Mobile phone number"
   },
   "submitButton": {
-    "ru": "Отправить",
-    "ro": "A trimite",
-    "en": "Send"
+    "ru": "Запросить",
+    "ro": "Solicita",
+    "en": "Request"
   }
 }

@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const keys = require('./services/keys');
 
 require('./models/User');
+require('./models/CatalogItem');
 
 const app = express();
 
@@ -28,7 +29,7 @@ mongoose
   .catch((error) => console.log(error));
 
 require('./routes')(app);
-require('./routes/products')(app);
+require('./routes/catalog')(app);
 require('./routes/contacts')(app);
 require('./routes/profile')(app);
 require('./routes/cart')(app);

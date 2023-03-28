@@ -1,8 +1,6 @@
 const header = require('./static/header');
 const footer = require('./static/footer');
-const banner = require('./static/banner');
 const pageTitle = require('./helperScripts/pageTitle');
-const categories = require('./static/categories');
 
 module.exports = ({ content, req }) => {
   return /*html*/ `
@@ -15,13 +13,11 @@ module.exports = ({ content, req }) => {
         <link rel="stylesheet" type="text/css" href="/styles/styles.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link rel="icon" type="image/x-icon" href="/imgs/favicon.ico">
-        <title>SHKAFMASTER - ${pageTitle({ req })}</title>
+        <title>SHKAFMASTER | ${pageTitle({ req })}</title>
       </head>
       <body>
         ${header({ req })}
         <div class="content">
-          ${banner({ req })}
-          ${categories({ req })}
           ${content}
         </div>
         ${footer({ req })}

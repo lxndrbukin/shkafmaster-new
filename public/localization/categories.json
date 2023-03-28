@@ -1,8 +1,8 @@
 {
   "categoriesHeader": {
-    "ru": "Популярные категории",
-    "ro": "Categorii populare",
-    "en": "Popular categories"
+    "ru": "Каталог",
+    "ro": "Catalog",
+    "en": "Catalog"
   },
   "categoryNames": {
     "kitchen": {
@@ -29,6 +29,11 @@
       "ru": "Столы",
       "ro": "Mese",
       "en": "Tables"
+    },
+    "living": {
+      "ru": "Стенки-горки",
+      "ro": "Living",
+      "en": "Living"
     }
   }
 }
