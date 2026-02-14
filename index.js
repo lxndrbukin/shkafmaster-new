@@ -1,45 +1,46 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cookieSession = require('cookie-session');
-const cookieParser = require('cookie-parser');
-const keys = require('./services/keys');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cookieSession = require("cookie-session");
+const cookieParser = require("cookie-parser");
+const keys = require("./services/keys");
 
-require('./models/User');
-require('./models/CatalogItem');
+require("dotenv").config();
+
+require("./models/User");
+require("./models/CatalogItem");
 
 const app = express();
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
   cookieSession({
-    keys: [keys.cookieKey],
+    keys: [process.env.COOKIE_KEY],
     maxAge: 24 * 60 * 60 * 1000,
   })
 );
 app.use(cookieParser());
 
 mongoose
-  .connect(keys.mongoDB, {
+  .connect(process.env.MONGODB, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log('CONNECTED TO MONGODB'))
+  .then(() => console.log("CONNECTED TO MONGODB"))
   .catch((error) => console.log(error));
 
-require('./routes')(app);
-require('./routes/catalog')(app);
-require('./routes/contacts')(app);
-require('./routes/profile')(app);
-require('./routes/cart')(app);
-require('./routes/auth')(app);
-require('./routes/addItem')(app);
-require('./routes/admin')(app);
-require('./routes/admin/users')(app);
-require('./routes/api')(app);
+require("./routes")(app);
+require("./routes/catalog")(app);
+require("./routes/contacts")(app);
+require("./routes/profile")(app);
+require("./routes/cart")(app);
+require("./routes/auth")(app);
+require("./routes/addItem")(app);
+require("./routes/admin")(app);
+require("./routes/admin/users")(app);
+require("./routes/api")(app);
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on port ${process.env.PORT}`);
 });
