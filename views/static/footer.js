@@ -1,7 +1,7 @@
-const footerLocal = require('../../public/localization/footer.json');
-const headerLocal = require('../../public/localization/header.json');
+const footerLocal = require("../../public/localization/footer.json");
+const headerLocal = require("../../public/localization/header.json");
 const { logo } = headerLocal;
-const { footerMenu } = footerLocal;
+const { footerMenu, promotions, contacts } = footerLocal;
 
 module.exports = ({ req }) => {
   const { lang } = req.cookies;
@@ -11,8 +11,8 @@ module.exports = ({ req }) => {
         <div class="footer-col">
           <a class="logo logo-dark" href="/">
             <div class="logo_primary">
-              <span class="logo_primary-left">SHKAF</span>
-              <span class="logo_primary-right">MASTER</span>
+              <span class="logo_primary-left">SMART</span>
+              <span class="logo_primary-right">MOBILI</span>
             </div>
           </a>
           <div class="footer-socials">

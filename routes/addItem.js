@@ -1,18 +1,18 @@
-const multer = require('multer');
+const multer = require("multer");
 
-const newItemTemplate = require('../views/pages/admin/addItem');
-const catalogItemsRepo = require('../repositories/catalogItems');
+const newItemTemplate = require("../views/pages/admin/addItem");
+const catalogItemsRepo = require("../repositories/catalogItems");
 
-const { setLanguage, checkLoggedIn } = require('./helpers/middlewares');
+const { setLanguage, checkLoggedIn } = require("./helpers/middlewares");
 const upload = multer({});
 
 module.exports = (app) => {
-  app.get('/new-item', setLanguage, checkLoggedIn, (req, res) => {
+  app.get("/new-item", setLanguage, checkLoggedIn, (req, res) => {
     res.send(newItemTemplate({ req }));
   });
 
-  app.post('/new-item', upload.single('image'), async (req, res) => {
-    const encodedImage = req.file.buffer.toString('base64');
+  app.post("/new-item", upload.single("image"), async (req, res) => {
+    const encodedImage = req.file.buffer.toString("base64");
     const catalogItem = await catalogItemsRepo.create({
       ru: {
         name: req.body.nameRU,
@@ -25,8 +25,7 @@ module.exports = (app) => {
       category: req.body.category,
       image: encodedImage,
     });
-    console.log(catalogItem);
     catalogItem.save();
-    res.redirect('/new-item');
+    res.redirect("/new-item");
   });
 };

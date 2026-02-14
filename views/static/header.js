@@ -1,9 +1,9 @@
-const headerProfile = require('./headerProfile');
-const headerLocal = require('../../public/localization/header.json');
+const headerProfile = require("./headerProfile");
+const headerLocal = require("../../public/localization/header.json");
 const { logo, menuButtons, userMenu } = headerLocal;
 
 module.exports = ({ req }) => {
-  const languages = ['ro', 'ru'];
+  const languages = ["ro", "ru"];
   const { lang } = req.cookies;
   const { session } = req;
   const langSelector = () => {
@@ -25,7 +25,7 @@ module.exports = ({ req }) => {
               `;
             }
           })
-          .join(' ')}
+          .join(" ")}
       </select>
     `;
   };
@@ -60,8 +60,8 @@ module.exports = ({ req }) => {
       <header class="header">
         <a class="logo" href="/">
           <div class="logo_primary">
-            <span class="logo_primary-left">SHKAF</span>
-            <span class="logo_primary-right">MASTER</span>
+            <span class="logo_primary-left">SMART</span>
+            <span class="logo_primary-right">MOBILI</span>
           </div>
         </a>
         <div class="header-links">
